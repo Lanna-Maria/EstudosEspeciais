@@ -1,0 +1,124 @@
+.pedidos-container{
+color: white;
+  max-width: 700px;
+  padding: 25px 30px;
+  width: 100%;
+  margin: 40px auto;
+  border-radius: 15px;
+  box-shadow: 0px 8px 25px rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(6px);
+  background: linear-gradient(
+    180deg,
+    rgba(50, 35, 25, 0.95),
+    rgba(30, 25, 20, 0.95),
+      );
+}
+
+.pedidos-container h2{
+  text-align: center;
+  margin-bottom: 20px;
+   color: #3e2723;
+}
+
+.form-group{
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+ color: #3E2723;
+ font-weight: 900;
+}
+
+.form-group input,
+.form-group select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+
+.menu-category-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 20px 0;
+  justify-content: center;
+}
+
+.menu-category-list button {
+   background-color: #8B4513;
+  border-color: #8B4513;
+  color: #ffffff;
+  font-weight: bold;
+  padding: 8px 14px;
+  border-radius: 8px;
+  transition: 0.3s;
+}
+
+.menu-category-list button:hover {
+ background-color: #A0522D;
+  border: #A0522D;
+
+}
+
+
+.category-button {
+  width: 48%;
+  margin-bottom: 10px;
+  background-color: #8B4513 !important;
+  color: #ffffff;
+  border: none !important;
+  border-radius: 5px;
+  padding: 10px;
+  cursor: pointer;
+  font-size: 16px;
+  text-align: center;
+}
+
+.category-button:hover {
+  background-color: #A0522D !important;
+  border: none !important;
+}
+
+.pedidos-container h3{
+  text-align: center;
+  margin-top: 20px;
+   color: white;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+button[type="submit"]{
+  width: 100%;
+  padding: 10px;
+  background-color: #8B4513;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  text-align: center;
+  margin-top: 20px;
+}
+
+button[type="submit"]:hover{
+  background-color: #A0522D;
+}
+
+/*Estilo para os botões no madal*/
+
+.modal-footer .btn-primary {
+  background-color: #8B4513;
+  border-color: #8B4513;
+  color: #ffffff;
+}
+
+.modal-footer .btn-primary:hover {
+  background-color: #A0522D;
+  border: #A0522D;
+}
+

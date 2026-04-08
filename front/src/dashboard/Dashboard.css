@@ -1,0 +1,291 @@
+.dashboard {
+  position: relative;
+  min-height: 100vh;
+}
+
+.dashboard::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: 
+    linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
+    url('../assets/imagens/fundo.png')center/cover no-repeat;
+  filter: blur(6px);
+  z-index: -1;
+}
+
+/* TOPBAR */
+.topbar {
+   background-color: #8b5e3c;
+  color: #3e2723 !important;
+  padding: 18px 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+.topbar button {
+  background-color: #8B4513;
+  border-color: #8B4513;
+  color: #ffffff;
+  border: none;
+  padding: 8px 15px;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.topbar button:hover {
+  background-color: #A0522D;
+  border: #A0522D;
+}
+
+/* STATS */
+.stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 15px;
+  padding: 20px;
+  
+}
+
+.stat-card {
+  background: linear-gradient(135deg, #ffffff, #f8f5f2);
+  padding: 20px;
+  border-radius: 16px;
+  text-align: center;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+  transition: 0.2s;
+}
+
+.stat-card:hover {
+  transform: translateY(-3px);
+}
+
+.stat-card p {
+  font-size: 22px;
+  font-weight: bold;
+  color: #4b2e2b;
+}
+
+/* BARRA */
+.progress {
+  display: flex;
+  height: 12px;
+  margin: 0 20px;
+  border-radius: 10px;
+  overflow: hidden;
+  background: #ddd;
+}
+
+.progress-bar.concluido {
+  background: #27ae60;
+}
+
+.progress-bar.cancelado {
+  background: #e74c3c;
+}
+
+/* SECTION */
+.section {
+  padding: 20px;
+}
+
+.section h2 {
+  text-align: center;
+  background: #ffffff;
+  display: inline-block;
+  padding: 8px 20px;
+  border-radius: 20px;
+  margin: 30px auto 15px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+/* GRID (CORRIGIDO 🔥) */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 350px));
+  justify-content: center;
+  gap: 20px;
+}
+
+/* CARD */
+.card {
+  background: white;
+  padding: 18px;
+  border-radius: 16px;
+  border-left: 6px solid #6f4e37;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.1);
+  transition: 0.2s;
+  width: 100%;
+  max-width: 350px;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+}
+
+/* STATUS */
+.card.pendente {
+  border-left-color: #f39c12;
+}
+
+.card.concluído {
+  border-left-color: #27ae60;
+}
+
+.card.cancelado {
+  border-left-color: #e74c3c;
+}
+
+/* HEADER */
+.card-header {
+  display: flex;
+  flex-direction: column; /* 🔥 muda aqui */
+  align-items: center;
+  text-align: center;
+  gap: 5px;
+}
+
+/* BADGE */
+.badge {
+  padding: 5px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.badge.pendente {
+  background: #fff3cd;
+  color: #856404;
+}
+
+.badge.concluído {
+  background: #d4edda;
+  color: #155724;
+}
+
+.badge.cancelado {
+  background: #f8d7da;
+  color: #721c24;
+}
+
+/* TEXTO */
+.card p {
+  font-size: 14px;
+  margin: 4px 0;
+}
+
+/* ITENS */
+.items {
+  margin-top: 10px;
+  list-style: none;
+  padding: 0;
+}
+
+.items li {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+}
+
+/* TOTAL */
+.total {
+  margin-top: 10px;
+  font-size: 16px;
+  font-weight: bold;
+  color: #4b2e2b;
+}
+
+/* BOTÕES */
+.actions {
+  margin-top: 12px;
+  display: flex;
+  gap: 10px;
+}
+
+.actions button {
+  flex: 1;
+  padding: 10px;
+  border: none;
+  border-radius: 10px;
+  font-weight: bold;
+  color: white;
+  cursor: pointer;
+  transition: 0.2s;
+  background: linear-gradient(135deg, #27ae60, #2ecc71);
+}
+
+.actions .cancel {
+  background: linear-gradient(135deg, #c0392b, #e74c3c);
+}
+
+.actions button:hover {
+  transform: scale(1.05);
+}
+
+/* RESPONSIVO */
+@media (max-width: 768px) {
+  .topbar {
+    flex-direction: column;
+    gap: 10px;
+    text-align: center;
+  }
+
+  .stats {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  .card {
+    max-width: 100%;
+  }
+}
+
+/* KANBAN CONTAINER */
+.kanban {
+  display: flex;
+  gap: 20px;
+  padding: 20px;
+  align-items: flex-start;
+}
+
+/* COLUNA */
+.column {
+  flex: 1;
+  background: #f8f5f2;
+  border-radius: 16px;
+  padding: 15px;
+  min-height: 400px;
+  box-shadow: inset 0 0 10px rgba(0,0,0,0.05);
+}
+
+/* TÍTULO */
+.column h2 {
+  text-align: center;
+  margin-bottom: 15px;
+  color: #4b2e2b;
+}
+
+/* LISTA DE CARDS */
+.column-cards {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+}
+
+.card {
+  width: 260px;
+}
+
+@media (max-width: 900px) {
+  .kanban {
+    flex-direction: column;
+  }
+}

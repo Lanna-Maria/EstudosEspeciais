@@ -1,0 +1,46 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Cardapio {
+  id          Int      @id @default(autoincrement())
+  nome        String
+  preco       Float
+  categoria   String
+  criadoEm    DateTime @default(now())
+}
+
+model Pedido {
+  id              Int      @id @default(autoincrement())
+  nomeCliente     String
+  itens           Json
+  precoTotal      Float
+
+  formaPagamento  String?
+  tipoPedido      String?
+
+  rua             String?
+  numero          String?
+  bairro          String?
+
+  precisaTroco    Boolean?
+  trocoPara       Float?
+
+  observacoes     String?
+
+  status          String   @default("Pendente") // 👈 AQUI
+
+  criadoEm        DateTime @default(now())
+}
+
+model Administrador {
+  id         Int      @id @default(autoincrement())
+  email      String   @unique
+  senha      String
+  criadoEm   DateTime @default(now())
+}

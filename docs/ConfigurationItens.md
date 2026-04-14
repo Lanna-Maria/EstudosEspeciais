@@ -65,3 +65,36 @@
 - **Commit ID:** 2d0124891bf4ccd8faacee7893c91ad3b5e50314
 - **Mudanças:** Centralização das rotas de cardápio, pedidos, admin e dashboard. Arquivos: `routes/index.js`, `adminRoutes.js`, `pedidosRoutes.js`.
 - **Data Release:** 07/04/2026
+
+## Item de Configuração: Controller de Pedidos
+
+- **ID:** IC-007
+- **Tipo:** Código-fonte
+- **Versão:** 1.0.0
+- **Repositório:** [GitHub](https://github.com/Lanna-Maria/EstudosEspeciais)
+- **Branch:** main
+- **Commit ID:** 2d0124891bf4ccd8faacee7893c91ad3b5e50314
+- **Mudanças:** Regras de negócio para criação, consulta e atualização de pedidos. Arquivos: `pedidosController.js`.
+- **Data Release:** 07/04/2026
+
+# Item de Configuração: Regras de Versionamento (Gitignore)
+
+- **ID**: IC-008
+- **Tipo**: Configuração de Infraestrutura
+- **Versão**: 1.0.0
+- **Repositório:** [GitHub](https://github.com/Lanna-Maria/EstudosEspeciais)
+- **Branch**: main
+- **Commit ID**: 322b5a38ddb52029c92b7e6901ce02a041919c58
+- **Mudanças**: Definição da listagem de exclusão em todas as camadas (`node_modules`, pastas de log e env) blindando o repositório.
+- **Data Release**: 08/04/2026
+
+# Item de Configuração: Configuração de Dependências Frontend
+
+- **ID**: IC-009
+- **Tipo**: Configuração de Software
+- **Versão**: 1.0.0
+- **Repositório:** [GitHub](https://github.com/Lanna-Maria/EstudosEspeciais)
+- **Branch**: main
+- **Commit ID**: 2d0124891bf4ccd8faacee7893c91ad3b5e50314
+- **Mudanças**: Registro imutável de versão (via `package-lock.json` e `package.json`) das libs utilizadas no Frontend (ex: React dom, Router, Web Vitals).
+- **Data Release**: 07/04/2026

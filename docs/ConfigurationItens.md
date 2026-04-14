@@ -32,3 +32,36 @@
 - **Commit ID:** 2d0124891bf4ccd8faacee7893c91ad3b5e50314
 - **Mudanças:** Configuração de middleware, CORS, JSON e roteamento base /api. Arquivos: `app.js`.
 - **Data Release:** 07/04/2026
+
+## Item de Configuração: Inicialização do Servidor
+
+- **ID:** IC-004
+- **Tipo:** Código-fonte
+- **Versão:** 1.0.0
+- **Repositório:** [GitHub](https://github.com/Lanna-Maria/EstudosEspeciais)
+- **Branch:** main
+- **Commit ID:** 2d0124891bf4ccd8faacee7893c91ad3b5e50314
+- **Mudanças:** Porta de execução e bootstrap do backend. Arquivos: server.js.
+- **Data Release:** 07/04/2026
+
+## Item de Configuração: Modelo de Dados (Persistência Prisma)
+
+- **ID:** IC-005
+- **Tipo:** Código-fonte
+- **Versão:** 1.0.0
+- **Repositório:** [GitHub](https://github.com/Lanna-Maria/EstudosEspeciais)
+- **Branch:** main
+- **Commit ID:** 2d0124891bf4ccd8faacee7893c91ad3b5e50314
+- **Mudanças:** Definição dos modelos, dados iniciais e acesso ao banco via Prisma. Arquivos: `schema.prisma`, `seed.js`, `prismaClient.js`.
+- **Data Release:** 07/04/2026
+
+## Item de Configuração: Rotas da API
+
+- **ID:** IC-006
+- **Tipo:** Código-fonte
+- **Versão:** 1.0.0
+- **Repositório:** [GitHub](https://github.com/Lanna-Maria/EstudosEspeciais)
+- **Branch:** main
+- **Commit ID:** 2d0124891bf4ccd8faacee7893c91ad3b5e50314
+- **Mudanças:** Centralização das rotas de cardápio, pedidos, admin e dashboard. Arquivos: `routes/index.js`, `adminRoutes.js`, `pedidosRoutes.js`.
+- **Data Release:** 07/04/2026

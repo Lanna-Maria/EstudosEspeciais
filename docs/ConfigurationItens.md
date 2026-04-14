@@ -98,3 +98,36 @@
 - **Commit ID**: 2d0124891bf4ccd8faacee7893c91ad3b5e50314
 - **Mudanças**: Registro imutável de versão (via `package-lock.json` e `package.json`) das libs utilizadas no Frontend (ex: React dom, Router, Web Vitals).
 - **Data Release**: 07/04/2026
+
+## Item de Configuração: Núcleo da Interface
+
+- **ID:** IC-010
+- **Tipo:** Código-fonte
+- **Versão:** 1.0.0
+- **Repositório:** [GitHub](https://github.com/Lanna-Maria/EstudosEspeciais)
+- **Branch:** main
+- **Commit ID:** 2d0124891bf4ccd8faacee7893c91ad3b5e50314
+- **Mudanças:** Estrutura principal da aplicação, inicialização no DOM e proteção de rotas administrativas. Arquivos: `App.js`, `src/index.js`, `PrivateRoute.jsx`.
+- **Data Release:** 07/04/2026
+
+## Item de Configuração: Telas Funcionais (Interface de Usuário)
+
+- **ID:** IC-011
+- **Tipo:** Código-fonte
+- **Versão:** 1.0.0
+- **Repositório:** [GitHub](https://github.com/Lanna-Maria/EstudosEspeciais)
+- **Branch:** main
+- **Commit ID:** 2d0124891bf4ccd8faacee7893c91ad3b5e50314
+- **Mudanças:** Interface de pedidos e dashboard administrativo para operação e gestão. Arquivos: `Pedidos.jsx`, `Dashboard.jsx`.
+- **Data Release:** 07/04/2026
+
+## Item de Configuração: Testes Automatizados
+
+- **ID:** IC-012
+- **Tipo:** Testes
+- **Versão:** 1.0.0
+- **Repositório:** [GitHub](https://github.com/Lanna-Maria/EstudosEspeciais)
+- **Branch:** main
+- **Commit ID:** 2d0124891bf4ccd8faacee7893c91ad3b5e50314
+- **Mudanças:** Cobertura inicial de renderização e validação básica da interface. Arquivos: `App.test.js`, `setupTests.js`.
+- **Data Release:** 07/04/2026

@@ -50,7 +50,7 @@ function Dashboard() {
     .filter((p) => p.status === 'Concluído')
     .reduce((acc, p) => acc + (p.precoTotal || 0), 0);
 
-  const totalPedidos = pedidosHoje.length || 1;
+  //const totalPedidos = pedidosHoje.length || 1;
   //const porcentagemConcluidos = (concluidos.length / totalPedidos) * 100;
   //const porcentagemCancelados = (cancelados.length / totalPedidos) * 100;
 

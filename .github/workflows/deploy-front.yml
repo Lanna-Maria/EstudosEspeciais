@@ -37,12 +37,13 @@ jobs:
         run: npm test -- --watchAll=false --passWithNoTests
 
   deploy:
-    name: Deploy to Vercel
+    name: Deploy Frontend to Vercel
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      deployments: write
     needs: test # só faz deploy se os testes passarem
+
+    env:
+      VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+      VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID_FRONT }}
 
     steps:
       - uses: actions/checkout@v4
@@ -54,15 +55,22 @@ jobs:
           cache: npm
           cache-dependency-path: front/package-lock.json
 
-      - name: Deploy to Vercel (action)
-        uses: amondnet/vercel-action@v42
-        id: vercel_deploy_front
-        with:
-          github-token: ${{ github.token }}
-          vercel-token: ${{ secrets.VERCEL_TOKEN }}
-          vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
-          vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID_FRONT }}
-          vercel-build: true
-          target: production
-          github-deployment-environment: production
-          github-deployment: true
+      # 1. Entramos na pasta para instalar as dependências localmente do front
+      - name: Install dependencies
+        run: cd front && npm ci
+
+      - name: Install Vercel CLI
+        run: npm install --global vercel@latest
+
+      # 2. O Pull precisa saber onde estão as configurações locais do projeto do front
+      - name: Pull Vercel Environment Information
+        run: vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }} --cwd front
+        
+      # 3. O Actions faz o build dentro da pasta correta
+      - name: Build Project Artifacts locally
+        run: cd front && npm run build
+
+      # 4. O Deploy roda na RAIZ. Ele lê a pasta .vercel gerada na raiz/front e deixa
+      # que a Vercel use o Root Directory "front" configurado no painel deles.
+      - name: Deploy Project Artifacts to Vercel
+        run: vercel --prod --token=${{ secrets.VERCEL_TOKEN }} --yes

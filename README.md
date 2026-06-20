@@ -35,7 +35,7 @@ Projeto desenvolvido durante a disciplina de Estudos Especiais (Gerência e Conf
 ### Backend
 - **Node.js** com **Express 5**
 - **Prisma ORM** para gerenciamento de banco de dados
-- **PostgreSQL** como banco de dados
+- **PostgreSQL** como banco de dados, hospedado no **Neon Console**
 - **JSON Web Token (jsonwebtoken)** para autenticação via JWT
 - **bcrypt** para hash seguro de senhas
 - **multer** para upload de imagens

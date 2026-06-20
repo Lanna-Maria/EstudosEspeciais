@@ -67,6 +67,10 @@ function Dashboard() {
           Sair
         </button>
       </header>
+      <div className="hero-menu">
+        <h1>Dashboard de Faturamento</h1>
+        <p>  Acompanhe o faturamento, pedidos concluídos, pendentes e demais indicadores do estabelecimento.</p>
+      </div>
       <div className="stats">
         <div className="stat-card">
           <h4>Pendentes</h4>
@@ -85,19 +89,9 @@ function Dashboard() {
           <p>R$ {totalHoje.toFixed(2)}</p>
         </div>
       </div>
-      <div className="progress">
-        <div
-          className="progress-bar concluido"
-          style={{ width: `${porcentagemConcluidos}%` }}
-        />
-        <div
-          className="progress-bar cancelado"
-          style={{ width: `${porcentagemCancelados}%` }}
-        />
-      </div>
       <div className="kanban">
         <div className="column">
-          <h2>🕒 Pendentes</h2>
+          <h2>Pendentes</h2>
           <div className="column-cards">
           {pendentes.map((pedido) => (
             <OrderCard
@@ -109,7 +103,7 @@ function Dashboard() {
         </div>
         </div>
         <div className="column">
-          <h2>✅ Concluídos</h2>
+          <h2>Concluídos</h2>
           <div className="column-cards">
             {concluidos.map((pedido) => (
               <OrderCard
@@ -121,7 +115,7 @@ function Dashboard() {
           </div>
         </div>
         <div className="column">
-          <h2>❌ Cancelados</h2>
+          <h2>Cancelados</h2>
           <div className="column-cards">
             {cancelados.map((pedido) => (
               <OrderCard

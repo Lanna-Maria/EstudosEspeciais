@@ -3,7 +3,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background: url('../../assets/imagens/fundo.png') no-repeat center;
+  background-color: #f8eadfcb;
   background-size: cover;
   color: #4a2c2a;
   padding: 20px;

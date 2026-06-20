@@ -14,7 +14,7 @@ export async function addMenuItem(formData, token) {
     formData,
     {
       headers: {
-        'Content-Type': 'multipart/form-data',
+        'Content-Type': 'application/json',
         Authorization: `Bearer ${token}`,
       },
     }

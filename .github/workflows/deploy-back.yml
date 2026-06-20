@@ -60,12 +60,13 @@ jobs:
         run: npm test -- --passWithNoTests
 
   deploy:
-    name: Deploy to Vercel
+    name: Deploy Backend to Vercel
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      deployments: write
     needs: test # só faz deploy se os testes passarem
+
+    env:
+      VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+      VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID_BACK }}
 
     steps:
       - uses: actions/checkout@v4
@@ -77,15 +78,22 @@ jobs:
           cache: npm
           cache-dependency-path: back/package-lock.json
 
-      - name: Deploy to Vercel (action)
-        uses: amondnet/vercel-action@v42
-        id: vercel_deploy
-        with:
-          github-token: ${{ github.token }}
-          vercel-token: ${{ secrets.VERCEL_TOKEN }}
-          vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
-          vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID_BACK }}
-          vercel-build: true
-          target: production
-          github-deployment-environment: production
-          github-deployment: true
+      # 1. Instala as dependências entrando fisicamente na pasta back
+      - name: Install dependencies
+        run: cd back && npm ci
+
+      # 2. Gera o Prisma Client dentro da pasta back
+      - name: Generate Prisma Client
+        run: cd back && npx prisma generate
+
+      - name: Install Vercel CLI
+        run: npm install --global vercel@latest
+
+      # 3. O Pull vincula as configurações apontando para a pasta local back
+      - name: Pull Vercel Environment Information
+        run: vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }} --cwd back
+        
+      # 4. O Deploy roda na RAIZ. Ele lê o projeto e deixa a Vercel 
+      # usar o Root Directory "back" que você configurou no painel deles.
+      - name: Deploy Project to Vercel
+        run: vercel --prod --token=${{ secrets.VERCEL_TOKEN }} --yes

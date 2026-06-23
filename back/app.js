@@ -11,11 +11,19 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
-app.get('/', (req, res) => {
-  res.json({ 
+app.use(express.static(path.join(__dirname, 'public')));
+
+app.get('/api', (req, res) => {
+  res.json({
     status: 'ok',
-    message: 'Café Gourmet API',
-    docs: '/api-docs'
+    message: 'Café Gourmet API v1.1.0',
+    endpoints: {
+      cardapio: '/api/cardapio',
+      pedidos: '/api/pedidos',
+      admin: '/api/admin/login',
+      dashboard: '/api/dashboard',
+    },
+    docs: '/api-docs',
   });
 });
 

@@ -65,9 +65,12 @@
   transition: 0.3s;
 }
 
-.menu-category-list button:hover {
-  background-color: #A0522D;
-  border: 1px solid #A0522D;
+.menu-category-list button:hover,
+.menu-category-list button:active,
+.menu-category-list button:focus,
+.menu-category-list button:focus-visible {
+  background-color: #A0522D !important;
+  border-color: #A0522D !important;
 }
 
 .category-button {

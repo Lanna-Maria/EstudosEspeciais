@@ -3,156 +3,103 @@
   "info": {
     "title": "Café Gourmet API",
     "description": "Documentação da API da Cafeteria",
-    "version": "1.0.0"
+    "version": "1.1.0"
   },
   "servers": [
     {
-      "url": "http://localhost:4000/api",
-      "description": "Development Server"
-    },
-    {
       "url": "https://cafe-gourmet-back.vercel.app/api",
       "description": "Production Server"
+    },
+    {
+      "url": "http://localhost:4000/api",
+      "description": "Development Server"
     }
   ],
   "tags": [
-    {
-      "name": "Cardápio",
-      "description": "Endpoints do cardápio"
-    },
-    {
-      "name": "Pedidos",
-      "description": "Endpoints de pedidos"
-    },
-    {
-      "name": "Admin",
-      "description": "Endpoints administrativos"
-    }
+    { "name": "Cardápio", "description": "Endpoints do cardápio" },
+    { "name": "Pedidos", "description": "Endpoints de pedidos" },
+    { "name": "Admin", "description": "Endpoints administrativos" },
+    { "name": "Dashboard", "description": "Endpoints do dashboard (requer autenticação)" }
   ],
   "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    },
     "schemas": {
       "CardapioItem": {
         "type": "object",
         "properties": {
-          "id": {
-            "type": "integer",
-            "example": 1
-          },
-          "nome": {
-            "type": "string",
-            "example": "Cappuccino"
-          },
+          "id": { "type": "integer", "example": 1 },
+          "nome": { "type": "string", "example": "Cappuccino" },
           "categoria": {
             "type": "string",
             "enum": ["cafes", "sobremesas", "especiais", "bebidasGeladas", "chas"],
             "example": "cafes"
           },
-          "preco": {
-            "type": "number",
-            "format": "float",
-            "example": 8.50
-          },
-          "createdAt": {
-            "type": "string",
-            "format": "date-time",
-            "example": "2026-04-11T10:30:00Z"
-          }
+          "preco": { "type": "number", "format": "float", "example": 8.50 },
+          "descricao": { "type": "string", "nullable": true, "example": "Café com leite vaporizado" },
+          "criadoEm": { "type": "string", "format": "date-time", "example": "2026-04-11T10:30:00Z" }
         }
       },
       "Pedido": {
         "type": "object",
         "properties": {
-          "id": {
-            "type": "integer",
-            "example": 1
-          },
-          "nomeCliente": {
-            "type": "string",
-            "example": "João Silva"
-          },
+          "id": { "type": "integer", "example": 1 },
+          "nomeCliente": { "type": "string", "example": "João Silva" },
           "itens": {
             "type": "array",
             "items": {
               "type": "object",
               "properties": {
-                "categoria": {
-                  "type": "string",
-                  "example": "cafes"
-                },
-                "nome": {
-                  "type": "string",
-                  "example": "Espresso"
-                },
-                "preco": {
-                  "type": "number",
-                  "example": 4.00
-                },
-                "quantidade": {
-                  "type": "integer",
-                  "example": 2
-                }
+                "categoria": { "type": "string", "example": "cafes" },
+                "nome": { "type": "string", "example": "Espresso" },
+                "preco": { "type": "number", "example": 4.00 },
+                "quantidade": { "type": "integer", "example": 2 }
               }
             }
           },
+          "precoTotal": { "type": "number", "format": "float", "example": 8.00 },
           "formaPagamento": {
             "type": "string",
+            "nullable": true,
             "enum": ["dinheiro", "pix", "debito", "credito"],
             "example": "pix"
           },
           "tipoPedido": {
             "type": "string",
+            "nullable": true,
             "enum": ["retirada", "entrega"],
             "example": "retirada"
           },
-          "rua": {
-            "type": "string",
-            "example": "Rua das Flores"
-          },
-          "numero": {
-            "type": "string",
-            "example": "123"
-          },
-          "bairro": {
-            "type": "string",
-            "example": "Centro"
-          },
+          "rua": { "type": "string", "nullable": true, "example": "Rua das Flores" },
+          "numero": { "type": "string", "nullable": true, "example": "123" },
+          "bairro": { "type": "string", "nullable": true, "example": "Centro" },
+          "precisaTroco": { "type": "boolean", "nullable": true, "example": false },
+          "trocoPara": { "type": "number", "nullable": true, "example": 20.00 },
+          "observacoes": { "type": "string", "nullable": true, "example": "Sem açúcar" },
           "status": {
             "type": "string",
-            "enum": ["pendente", "confirmado", "entregue"],
-            "example": "pendente"
+            "enum": ["Pendente", "Em Preparo", "Pronto", "Entregue"],
+            "example": "Pendente"
           },
-          "createdAt": {
-            "type": "string",
-            "format": "date-time",
-            "example": "2026-04-11T10:30:00Z"
-          }
+          "criadoEm": { "type": "string", "format": "date-time", "example": "2026-04-11T10:30:00Z" }
         }
       },
       "Admin": {
         "type": "object",
         "properties": {
-          "id": {
-            "type": "integer",
-            "example": 1
-          },
-          "email": {
-            "type": "string",
-            "format": "email",
-            "example": "admin@cafeteria.com"
-          },
-          "nome": {
-            "type": "string",
-            "example": "Administrador"
-          }
+          "id": { "type": "integer", "example": 1 },
+          "email": { "type": "string", "format": "email", "example": "admin@cafeteria.com" }
         }
       },
       "ErrorResponse": {
         "type": "object",
         "properties": {
-          "error": {
-            "type": "string",
-            "example": "Erro ao processar requisição"
-          }
+          "error": { "type": "string", "example": "Erro ao processar requisição" }
         }
       }
     }
@@ -160,94 +107,68 @@
   "paths": {
     "/cardapio": {
       "get": {
-        "tags": [
-          "Cardápio"
-        ],
+        "tags": ["Cardápio"],
         "summary": "Listar todos os itens do cardápio",
-        "description": "Retorna uma lista com todos os itens disponíveis no cardápio",
+        "description": "Retorna todos os itens disponíveis no cardápio. Rota pública.",
         "responses": {
           "200": {
             "description": "Lista de itens do cardápio",
             "content": {
               "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/CardapioItem"
-                  }
-                }
+                "schema": { "type": "array", "items": { "$ref": "#/components/schemas/CardapioItem" } }
               }
             }
           },
-          "500": {
-            "description": "Erro no servidor",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          }
+          "500": { "description": "Erro no servidor", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/ErrorResponse" } } } }
         }
       },
       "post": {
-        "tags": [
-          "Cardápio"
-        ],
+        "tags": ["Cardápio"],
         "summary": "Adicionar novo item ao cardápio",
-        "description": "Cria um novo item no cardápio",
+        "description": "Cria um novo item no cardápio. Requer autenticação JWT.",
+        "security": [{ "bearerAuth": [] }],
         "requestBody": {
           "required": true,
           "content": {
             "application/json": {
               "schema": {
                 "type": "object",
+                "required": ["nome", "categoria", "preco"],
                 "properties": {
-                  "nome": {
-                    "type": "string"
-                  },
-                  "categoria": {
-                    "type": "string"
-                  },
-                  "preco": {
-                    "type": "number"
-                  }
+                  "nome": { "type": "string", "example": "Cappuccino" },
+                  "categoria": { "type": "string", "enum": ["cafes", "sobremesas", "especiais", "bebidasGeladas", "chas"], "example": "cafes" },
+                  "preco": { "type": "number", "example": 8.50 },
+                  "descricao": { "type": "string", "example": "Café com leite vaporizado" }
                 }
               }
             }
           }
         },
         "responses": {
-          "201": {
-            "description": "Item criado com sucesso"
-          },
-          "400": {
-            "description": "Dados inválidos"
-          },
-          "500": {
-            "description": "Erro no servidor"
-          }
+          "201": { "description": "Item criado com sucesso", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/CardapioItem" } } } },
+          "401": { "description": "Token JWT ausente ou inválido" },
+          "500": { "description": "Erro no servidor" }
         }
       }
     },
     "/cardapio/{id}": {
+      "get": {
+        "tags": ["Cardápio"],
+        "summary": "Buscar item por ID",
+        "description": "Retorna um item específico do cardápio. Rota pública.",
+        "parameters": [{ "name": "id", "in": "path", "required": true, "schema": { "type": "integer" }, "example": 1 }],
+        "responses": {
+          "200": { "description": "Item encontrado", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/CardapioItem" } } } },
+          "404": { "description": "Item não encontrado" },
+          "500": { "description": "Erro no servidor" }
+        }
+      },
       "put": {
-        "tags": [
-          "Cardápio"
-        ],
+        "tags": ["Cardápio"],
         "summary": "Atualizar item do cardápio",
-        "description": "Atualiza um item existente no cardápio",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer"
-            }
-          }
-        ],
+        "description": "Atualiza um item existente. Requer autenticação JWT.",
+        "security": [{ "bearerAuth": [] }],
+        "parameters": [{ "name": "id", "in": "path", "required": true, "schema": { "type": "integer" }, "example": 1 }],
         "requestBody": {
           "required": true,
           "content": {
@@ -255,162 +176,107 @@
               "schema": {
                 "type": "object",
                 "properties": {
-                  "nome": {
-                    "type": "string"
-                  },
-                  "categoria": {
-                    "type": "string"
-                  },
-                  "preco": {
-                    "type": "number"
-                  }
+                  "nome": { "type": "string", "example": "Cappuccino Especial" },
+                  "categoria": { "type": "string", "enum": ["cafes", "sobremesas", "especiais", "bebidasGeladas", "chas"], "example": "especiais" },
+                  "preco": { "type": "number", "example": 10.00 },
+                  "descricao": { "type": "string", "example": "Versão especial do clássico" }
                 }
               }
             }
           }
         },
         "responses": {
-          "200": {
-            "description": "Item atualizado com sucesso"
-          },
-          "404": {
-            "description": "Item não encontrado"
-          },
-          "500": {
-            "description": "Erro no servidor"
-          }
+          "200": { "description": "Item atualizado com sucesso", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/CardapioItem" } } } },
+          "401": { "description": "Token JWT ausente ou inválido" },
+          "404": { "description": "Item não encontrado" },
+          "500": { "description": "Erro no servidor" }
         }
       },
       "delete": {
-        "tags": [
-          "Cardápio"
-        ],
+        "tags": ["Cardápio"],
         "summary": "Deletar item do cardápio",
-        "description": "Remove um item do cardápio",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer"
-            }
-          }
-        ],
+        "description": "Remove um item do cardápio. Requer autenticação JWT.",
+        "security": [{ "bearerAuth": [] }],
+        "parameters": [{ "name": "id", "in": "path", "required": true, "schema": { "type": "integer" }, "example": 1 }],
         "responses": {
-          "204": {
-            "description": "Item deletado com sucesso"
-          },
-          "404": {
-            "description": "Item não encontrado"
-          },
-          "500": {
-            "description": "Erro no servidor"
-          }
+          "200": { "description": "Item removido com sucesso" },
+          "401": { "description": "Token JWT ausente ou inválido" },
+          "404": { "description": "Item não encontrado" },
+          "500": { "description": "Erro no servidor" }
         }
       }
     },
     "/pedidos": {
       "get": {
-        "tags": [
-          "Pedidos"
-        ],
+        "tags": ["Pedidos"],
         "summary": "Listar todos os pedidos",
-        "description": "Retorna uma lista com todos os pedidos registrados",
+        "description": "Retorna todos os pedidos registrados. Rota pública.",
         "responses": {
-          "200": {
-            "description": "Lista de pedidos",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/Pedido"
-                  }
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Erro no servidor"
-          }
+          "200": { "description": "Lista de pedidos", "content": { "application/json": { "schema": { "type": "array", "items": { "$ref": "#/components/schemas/Pedido" } } } } },
+          "500": { "description": "Erro no servidor" }
         }
       },
       "post": {
-        "tags": [
-          "Pedidos"
-        ],
+        "tags": ["Pedidos"],
         "summary": "Criar novo pedido",
-        "description": "Cria um novo pedido no sistema",
+        "description": "Cria um novo pedido no sistema. Rota pública.",
         "requestBody": {
           "required": true,
           "content": {
             "application/json": {
               "schema": {
                 "type": "object",
+                "required": ["nomeCliente", "itens"],
                 "properties": {
-                  "nomeCliente": {
-                    "type": "string"
-                  },
+                  "nomeCliente": { "type": "string", "example": "João Silva" },
                   "itens": {
-                    "type": "array"
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "required": ["nome", "preco", "quantidade"],
+                      "properties": {
+                        "categoria": { "type": "string", "example": "cafes" },
+                        "nome": { "type": "string", "example": "Espresso" },
+                        "preco": { "type": "number", "example": 4.00 },
+                        "quantidade": { "type": "integer", "example": 2 }
+                      }
+                    }
                   },
-                  "formaPagamento": {
-                    "type": "string"
-                  },
-                  "tipoPedido": {
-                    "type": "string"
-                  },
-                  "rua": {
-                    "type": "string"
-                  },
-                  "numero": {
-                    "type": "string"
-                  },
-                  "bairro": {
-                    "type": "string"
-                  },
-                  "observacoes": {
-                    "type": "string"
-                  }
+                  "formaPagamento": { "type": "string", "enum": ["dinheiro", "pix", "debito", "credito"], "example": "pix" },
+                  "tipoPedido": { "type": "string", "enum": ["retirada", "entrega"], "example": "retirada" },
+                  "rua": { "type": "string", "example": "Rua das Flores" },
+                  "numero": { "type": "string", "example": "123" },
+                  "bairro": { "type": "string", "example": "Centro" },
+                  "precisaTroco": { "type": "boolean", "example": false },
+                  "trocoPara": { "type": "number", "example": 20.00 },
+                  "observacoes": { "type": "string", "example": "Sem açúcar" }
                 }
               }
             }
           }
         },
         "responses": {
-          "201": {
-            "description": "Pedido criado com sucesso"
-          },
-          "400": {
-            "description": "Dados inválidos"
-          },
-          "500": {
-            "description": "Erro no servidor"
-          }
+          "201": { "description": "Pedido criado com sucesso", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/Pedido" } } } },
+          "400": { "description": "Dados inválidos" },
+          "500": { "description": "Erro no servidor" }
         }
       }
     },
     "/admin/login": {
       "post": {
-        "tags": [
-          "Admin"
-        ],
+        "tags": ["Admin"],
         "summary": "Login do administrador",
-        "description": "Autentica um administrador no sistema",
+        "description": "Autentica um administrador e retorna um token JWT.",
         "requestBody": {
           "required": true,
           "content": {
             "application/json": {
               "schema": {
                 "type": "object",
+                "required": ["email", "senha"],
                 "properties": {
-                  "email": {
-                    "type": "string"
-                  },
-                  "senha": {
-                    "type": "string"
-                  }
+                  "email": { "type": "string", "format": "email", "example": "admin@cafeteria.com" },
+                  "senha": { "type": "string", "format": "password", "example": "123" }
                 }
               }
             }
@@ -424,27 +290,85 @@
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "admin": {
-                      "$ref": "#/components/schemas/Admin"
-                    },
-                    "message": {
-                      "type": "string",
-                      "example": "Login realizado com sucesso"
-                    }
+                    "message": { "type": "string", "example": "Login realizado com sucesso" },
+                    "token": { "type": "string", "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..." },
+                    "admin": { "$ref": "#/components/schemas/Admin" }
                   }
                 }
               }
             }
           },
-          "400": {
-            "description": "Dados inválidos"
+          "400": { "description": "Email e senha são obrigatórios" },
+          "401": { "description": "Administrador não encontrado ou credenciais inválidas" },
+          "500": { "description": "Erro no servidor" }
+        }
+      }
+    },
+    "/admin/dashboard": {
+      "get": {
+        "tags": ["Admin"],
+        "summary": "Verificar acesso autenticado",
+        "description": "Retorna os dados do admin autenticado via JWT.",
+        "security": [{ "bearerAuth": [] }],
+        "responses": {
+          "200": {
+            "description": "Acesso autorizado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": { "type": "string", "example": "Acesso autorizado" },
+                    "admin": { "$ref": "#/components/schemas/Admin" }
+                  }
+                }
+              }
+            }
           },
-          "401": {
-            "description": "Email ou senha incorretos"
-          },
-          "500": {
-            "description": "Erro no servidor"
+          "401": { "description": "Token JWT ausente ou inválido" },
+          "500": { "description": "Erro no servidor" }
+        }
+      }
+    },
+    "/dashboard": {
+      "get": {
+        "tags": ["Dashboard"],
+        "summary": "Listar pedidos do dashboard",
+        "description": "Retorna todos os pedidos ordenados por data (mais recentes primeiro). Requer autenticação JWT.",
+        "security": [{ "bearerAuth": [] }],
+        "responses": {
+          "200": { "description": "Lista de pedidos", "content": { "application/json": { "schema": { "type": "array", "items": { "$ref": "#/components/schemas/Pedido" } } } } },
+          "401": { "description": "Token JWT ausente ou inválido" },
+          "500": { "description": "Erro no servidor" }
+        }
+      }
+    },
+    "/dashboard/{id}": {
+      "put": {
+        "tags": ["Dashboard"],
+        "summary": "Atualizar status de um pedido",
+        "description": "Atualiza o status de um pedido específico. Requer autenticação JWT.",
+        "security": [{ "bearerAuth": [] }],
+        "parameters": [{ "name": "id", "in": "path", "required": true, "schema": { "type": "integer" }, "example": 1 }],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["status"],
+                "properties": {
+                  "status": { "type": "string", "enum": ["Pendente", "Em Preparo", "Pronto", "Entregue"], "example": "Em Preparo" }
+                }
+              }
+            }
           }
+        },
+        "responses": {
+          "200": { "description": "Status atualizado com sucesso", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/Pedido" } } } },
+          "401": { "description": "Token JWT ausente ou inválido" },
+          "404": { "description": "Pedido não encontrado" },
+          "500": { "description": "Erro no servidor" }
         }
       }
     }

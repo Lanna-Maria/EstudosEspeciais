@@ -23,9 +23,9 @@ Projeto desenvolvido durante a disciplina de Estudos Especiais (Gerência e Conf
 
 ## 🎯 Funcionalidades
 
-- **Gerenciamento de Cardápio**: Adicionar, editar e remover itens do menu (com suporte a imagem)
+- **Gerenciamento de Cardápio**: Adicionar, editar e remover itens do menu
 - **Pedidos**: Criar, visualizar e gerenciar pedidos com status em tempo real
-- **Dashboard**: Visualizar estatísticas e histórico de vendas
+- **Dashboard**: Visualizar e atualizar status dos pedidos pelo painel administrativo
 - **Autenticação de Admin**: Login seguro com JWT para administradores
 - **Gestão de Forma de Pagamento e Entrega**: Rastreamento de pedidos por endereço, com suporte a troco
 - **Documentação de API**: Swagger UI disponível para explorar os endpoints
@@ -35,10 +35,9 @@ Projeto desenvolvido durante a disciplina de Estudos Especiais (Gerência e Conf
 ### Backend
 - **Node.js** com **Express 5**
 - **Prisma ORM** para gerenciamento de banco de dados
-- **PostgreSQL** como banco de dados, hospedado no **Neon Console**
+- **PostgreSQL** como banco de dados
 - **JSON Web Token (jsonwebtoken)** para autenticação via JWT
 - **bcrypt** para hash seguro de senhas
-- **multer** para upload de imagens
 - **swagger-autogen** + **swagger-ui-express** para documentação automática da API
 - **CORS** para controle de origem
 - **Jest** para testes, com **fast-check** para testes baseados em propriedades
@@ -181,7 +180,7 @@ O frontend abrirá em `http://localhost:3000` por padrão.
 ### Backend
 - `npm run dev` — Inicia o servidor em modo desenvolvimento (nodemon)
 - `npm start` — Inicia o servidor em produção
-- `npm run swagger` — Gera a documentação Swagger (`swagger-output.json`)
+- `npm run swagger` — Gera a documentação Swagger (`swagger.json`)
 - `npm test` — Executa os testes com Jest
 - `npm run vercel-build` — Gera o Prisma Client para deploy no Vercel
 
@@ -244,8 +243,8 @@ A base da API em produção é `https://cafe-gourmet-back.vercel.app/api`.
 |--------|------|------|-----------|
 | `GET` | `/cardapio` | ❌ | Lista todos os itens do cardápio |
 | `GET` | `/cardapio/:id` | ❌ | Retorna um item pelo ID |
-| `POST` | `/cardapio` | ✅ JWT | Adiciona novo item (aceita upload de imagem) |
-| `PUT` | `/cardapio/:id` | ✅ JWT | Atualiza item existente (aceita upload de imagem) |
+| `POST` | `/cardapio` | ✅ JWT | Adiciona novo item |
+| `PUT` | `/cardapio/:id` | ✅ JWT | Atualiza item existente |
 | `DELETE` | `/cardapio/:id` | ✅ JWT | Remove um item do cardápio |
 
 ### Dashboard
@@ -277,7 +276,7 @@ A base da API em produção é `https://cafe-gourmet-back.vercel.app/api`.
 | `nome` | String | ✅ | Nome do item |
 | `preco` | Float | ✅ | Preço do item |
 | `categoria` | String | ✅ | Categoria |
-| `imagem` | String | ❌ | URL ou caminho da imagem |
+| `descricao` | String | ❌ | Descrição do item |
 | `criadoEm` | DateTime | ✅ | Data de criação |
 
 ### Pedido
@@ -286,15 +285,15 @@ A base da API em produção é `https://cafe-gourmet-back.vercel.app/api`.
 | `id` | Int | ✅ | ID único (autoincremento) |
 | `nomeCliente` | String | ✅ | Nome do cliente |
 | `itens` | JSON | ✅ | Lista de itens do pedido |
-| `precoTotal` | Float | ✅ | Preço total |
-| `status` | String | ✅ | Status do pedido — padrão `"Pendente"` (ex.: Em Preparo, Pronto, Entregue) |
-| `formaPagamento` | String | ❌ | Forma de pagamento |
-| `tipoPedido` | String | ❌ | Tipo (Entrega, Balcão, etc.) |
+| `precoTotal` | Float | ✅ | Preço total calculado |
+| `status` | String | ✅ | Status do pedido — padrão `"Pendente"` (ex.: `"Em Preparo"`, `"Pronto"`, `"Entregue"`) |
+| `formaPagamento` | String | ❌ | Forma de pagamento (`dinheiro`, `pix`, `debito`, `credito`) |
+| `tipoPedido` | String | ❌ | Tipo (`retirada` ou `entrega`) |
 | `rua` | String | ❌ | Rua para entrega |
 | `numero` | String | ❌ | Número para entrega |
 | `bairro` | String | ❌ | Bairro para entrega |
 | `precisaTroco` | Boolean | ❌ | Se o cliente precisa de troco |
-| `trocoPara` | Float | ❌ | Valor para o qual dar troco |
+| `trocoPara` | Float | ❌ | Valor para o qual dar troco (apenas quando `formaPagamento = dinheiro`) |
 | `observacoes` | String | ❌ | Observações adicionais |
 | `criadoEm` | DateTime | ✅ | Data de criação |
 

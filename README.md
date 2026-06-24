@@ -10,7 +10,7 @@ Projeto web de uma cafeteria, com backend em Node.js/Express, frontend em React 
 
 ## Descrição
 
-Projeto desenvolvido durante a disciplina de Estudos Especiais (Gerência e Configuração de Software) - 2026.1 da UFC.
+Projeto desenvolvido durante a disciplina de Estudos Especiais (Gerência de Configuração de Software) - 2026.1 da UFC.
 
 ### 👩‍💻 Grupo da Pós-graduação (Equipe B)
 
@@ -40,14 +40,14 @@ Projeto desenvolvido durante a disciplina de Estudos Especiais (Gerência e Conf
 - **bcrypt** para hash seguro de senhas
 - **swagger-autogen** + **swagger-ui-express** para documentação automática da API
 - **CORS** para controle de origem
-- **Jest** para testes, com **fast-check** para testes baseados em propriedades
+- **Jest** para testes, com Supertest para testes de integração e **fast-check** para testes baseados em propriedades
 
 ### Frontend
 - **React 19** com **React Router v6**
 - **React Bootstrap** para componentes UI
 - **Axios** para requisições HTTP
 - **Bootstrap 5** para estilização
-- **@testing-library/react** para testes de componentes
+- **React Testing Library** para testes de componentes
 
 ## 🔐 Segurança
 
